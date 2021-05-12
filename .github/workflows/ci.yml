@@ -15,5 +15,5 @@ jobs:
             - uses: joschi/setup-jdk@v2.3.0 # download jdk! Action implemented in repository "joschi/setup-jdk" tag "2.3.0"
               with: # Actions parameters (action name omitted)
                 java-version: 15
-            - name: Build #cusom action
+            - name: Build and Check :P #cusom action
               run: ./gradlew check #performs gradlew check
