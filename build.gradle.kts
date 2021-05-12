@@ -21,3 +21,4 @@ application {
 tasks.named<Test>("test") {
     useJUnitPlatform()
 }
+
