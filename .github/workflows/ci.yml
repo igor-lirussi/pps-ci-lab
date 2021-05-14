@@ -18,3 +18,9 @@ jobs:
                 java-version: 15
             - name: Build and Check :P #cusom action
               run: ./gradlew clean build #performs gradlew build, it check if present checkstyle, it runs test with junit, it assembles the jar
+            - name: send custom message telegram
+              uses: appleboy/telegram-action@master
+              with:
+                to: ${{ secrets.TELEGRAM_TO }}
+                token: ${{ secrets.TELEGRAM_TOKEN }}
+                args: The ${{ github.event_name }} event triggered first step.
