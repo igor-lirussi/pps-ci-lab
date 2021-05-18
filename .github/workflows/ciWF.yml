@@ -1,11 +1,11 @@
-name: Clone Repository
+name: Build Repository WF
 on: #TRIGGERS
     push: # On  push
         brancehs: #on brnaches
             - main # main one
 
 jobs:
-    Build: # Job name
+    BuildJob: # Job name
         runs-on: ubuntu-latest # Operating system selection
         env: # Environment can be controlled at the job or step level
             TERM: dumb #no prints

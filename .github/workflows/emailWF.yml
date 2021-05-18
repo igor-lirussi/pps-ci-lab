@@ -5,8 +5,7 @@ on: #TRIGGERS
             - main # main one
 
 jobs:
-  Build:
-    name: Email Job
+  EmailJob:
     runs-on: ubuntu-latest
     steps:
     - run: pwd

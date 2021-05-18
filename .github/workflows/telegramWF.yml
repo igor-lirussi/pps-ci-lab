@@ -1,12 +1,11 @@
-name: telegram message
+name: Telegram Message WF
 on: #TRIGGERS
     push: # On  push
         brancehs: #on brnaches
             - main # main one
 
 jobs:
-  Build:
-    name: TelegramJob
+  TelegramJob:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
@@ -15,4 +14,5 @@ jobs:
       with:
         to: ${{ secrets.TELEGRAM_TO }}
         token: ${{ secrets.TELEGRAM_TOKEN }}
-        args: The ${{ github.event_name }} event triggered first step, by ${{ github.actor }}.
+        args: ${{ github.event_name }} event on github.com/${{ github.repository }}, by **${{ github.actor }}**.
+        disable_web_page_preview: true
