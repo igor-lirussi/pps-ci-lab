@@ -19,6 +19,8 @@ jobs:
             - name: Build and Check :P #cusom action
               run: ./gradlew clean build #performs gradlew build, it check if present checkstyle, it runs test with junit, it assembles the jar
     TelegramJob:
+        if: always() #also when fails
+        needs: [BuildJob] #when finished this job
         runs-on: ubuntu-latest
         steps:
         - uses: actions/checkout@master
