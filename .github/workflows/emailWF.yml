@@ -1,8 +1,7 @@
 name: Email WorkFlow
 on: #TRIGGERS
     push: # On  push
-        brancehs: #on brnaches
-            - main # main one
+        branches: [master] #on branches
 
 jobs:
   EmailJob:

@@ -1,8 +1,7 @@
 name: Build Repository WF
 on: #TRIGGERS
     push: # On  push
-        brancehs: #on brnaches
-            - main # main one
+        branches: [master] #on brnaches
 
 jobs:
     BuildJob: # Job name
@@ -18,17 +17,35 @@ jobs:
                 java-version: 15
             - name: Build and Check :P #cusom action
               run: ./gradlew clean build #performs gradlew build, it check if present checkstyle, it runs test with junit, it assembles the jar
-    TelegramJob:
-        if: always() #also when fails
+    TelegramJobFailure:
+        if: failure() # when fails
         needs: [BuildJob] #when finished this job
         runs-on: ubuntu-latest
         steps:
-        - uses: actions/checkout@master
         - name: send custom message with args
           uses: appleboy/telegram-action@master
           with:
             to: ${{ secrets.TELEGRAM_TO }}
             token: ${{ secrets.TELEGRAM_TOKEN }}
-            args: ${{ github.event_name }} event on github.com/${{ github.repository }}, by **${{ github.actor }}**.
+            message: |
+                ${{ github.event_name }} event,
+                on github.com/${{ github.repository }}, 
+                by ${{ github.actor }}.
+                FAILED
             disable_web_page_preview: true
-            document: main.pdf
+    TelegramJobSuccess:
+        if: success() # when fails
+        needs: [BuildJob] #when finished this job
+        runs-on: ubuntu-latest
+        steps:
+        - name: send custom message with args
+          uses: appleboy/telegram-action@master
+          with:
+            to: ${{ secrets.TELEGRAM_TO }}
+            token: ${{ secrets.TELEGRAM_TOKEN }}
+            message: |
+                ${{ github.event_name }} event,
+                on github.com/${{ github.repository }}, 
+                by ${{ github.actor }}.
+                SUCCEDED
+            disable_web_page_preview: true
