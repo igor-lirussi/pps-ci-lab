@@ -34,7 +34,7 @@ jobs:
                 FAILED
             disable_web_page_preview: true
     TelegramJobSuccess:
-        if: success() # when fails
+        if: success() 
         needs: [BuildJob] #when finished this job
         runs-on: ubuntu-latest
         steps:
