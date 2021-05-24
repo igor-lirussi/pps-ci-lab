@@ -15,7 +15,7 @@ jobs:
               with: # Actions parameters (action name omitted)
                 java-version: 15
             - name: Build and Check :P 
-              run: ./gradlew clean check 
+              run: ./gradlew clean build 
     
     AutomergeJob:
         needs: BuildJob
@@ -25,5 +25,5 @@ jobs:
             uses: fastify/github-action-merge-dependabot@v1
             if: ${{ github.actor == 'dependabot[bot]' && github.event_name == 'pull_request' }}
             with:
-              github-token: ${{ secrets.GITHUB_TOKEN }}
+              GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               
