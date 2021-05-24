@@ -1,7 +1,6 @@
 name: Email WorkFlow
 on: #TRIGGERS
-    push: # On  push
-        branches: [master] #on branches
+    workflow_dispatch
 
 jobs:
   EmailJob:
@@ -29,7 +28,7 @@ jobs:
         # Optional whether this connection use TLS (default is true if server_port is 465)
         secure: true
         # Optional plain body:
-        body: Build job of ${{github.repository}} completed successfully this time, for real!
+        body: Job of ${{github.repository}} completed successfully this time, for real!
         # Optional carbon copy recipients:
         cc: gxe23786@eoopy.com
         # Optional recipient of the email response:

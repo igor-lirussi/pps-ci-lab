@@ -1,0 +1,29 @@
+name: AutormergePR WF
+on: #TRIGGERS
+    pull_request
+
+jobs:
+    BuildJob: 
+        runs-on: ubuntu-latest # Operating system selection
+        env: # Environment can be controlled at the job or step level
+            TERM: dumb #no prints
+        steps:
+            - name: Clone Repo with Checkout 
+              uses: actions/checkout@v2 # clones repo! 
+            - name: Install JDK
+              uses: joschi/setup-jdk@v2.3.0 # download jdk! 
+              with: # Actions parameters (action name omitted)
+                java-version: 15
+            - name: Build and Check :P 
+              run: ./gradlew clean check 
+    
+    AutomergeJob:
+        needs: BuildJob
+        runs-on: ubuntu-latest
+        steps:
+          - name: Merge 
+            uses: fastify/github-action-merge-dependabot@v1
+            if: ${{ github.actor == 'dependabot[bot]' && github.event_name == 'pull_request' }}
+            with:
+              github-token: ${{ secrets.GITHUB_TOKEN }}
+              

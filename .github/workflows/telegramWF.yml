@@ -1,7 +1,6 @@
 name: Telegram Message WF
 on: #TRIGGERS
-    push: # On  push
-        branches: [master] #on brnaches
+    workflow_dispatch
 
 jobs:
   TelegramJob:
