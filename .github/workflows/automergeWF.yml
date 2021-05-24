@@ -22,7 +22,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
           - name: Merge 
-            uses: fastify/github-action-merge-dependabot@v1
+            uses: ahmadnassri/action-dependabot-auto-merge@v2
             if: ${{ github.actor == 'dependabot[bot]' && github.event_name == 'pull_request' }}
             with:
               github-token: ${{secrets.AUTOMERGE_TOKEN}}
